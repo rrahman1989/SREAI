@@ -1,0 +1,7 @@
+[INCIDENT TIMELINE & CHAT LOGS - INC-8821]
+- 02:10 UTC: PagerDuty alerts fire. CheckoutAPI error rate hits 22%.
+- 02:12 UTC: On-call engineer Sarah joins bridge. Notes Kubernetes pods for payment-service are crash-looping.
+- 02:15 UTC: Dave checks GitHub. Sees PaymentService v2.1.4 was merged 15 minutes prior.
+- 02:20 UTC: Sarah runs `kubectl rollout undo deployment/payment-service` to roll back to v2.1.3.
+- 02:25 UTC: Error rates drop back to 0%. Pods stabilize. Incident resolved.
+- Root cause discovered later: New code tried to read a database config key (`merchant_config`) that was missing in the staging-to-prod sync.
